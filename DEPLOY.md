@@ -28,12 +28,12 @@ git push -u origin main
 Ao final você terá uma URL como:
 
 ```
-https://nora.onrender.com
+https://nora-jqe2.onrender.com
 ```
 
-- `https://nora.onrender.com/` → site de download do APK
-- `https://nora.onrender.com/app/` → rede social no navegador
-- `https://nora.onrender.com/downloads/nora.apk` → o APK
+- `https://nora-jqe2.onrender.com/` → site de download do APK
+- `https://nora-jqe2.onrender.com/app/` → rede social no navegador
+- `https://nora-jqe2.onrender.com/downloads/nora.apk` → o APK
 
 ## 3. Configure o email de verificação (opcional, mas recomendado)
 
@@ -58,7 +58,7 @@ Alternativa sem Gmail: crie uma conta gratuita no https://www.brevo.com
 
 ## 4. O APK já vem configurado
 
-O APK já tem a URL `https://nora.onrender.com` embutida — quem baixar só precisa
+O APK já tem a URL `https://nora-jqe2.onrender.com` embutida — quem baixar só precisa
 instalar e usar, sem configurar nada.
 
 **Importante**: isso só funciona se o serviço no Render se chamar exatamente `nora`
