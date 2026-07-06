@@ -56,21 +56,30 @@ em `SMTP_PASS`.
 Alternativa sem Gmail: crie uma conta gratuita no https://www.brevo.com
 (300 emails/dia grátis) e use os dados SMTP que eles fornecem.
 
-## 4. Aponte o APK para o servidor
+## 4. O APK já vem configurado
 
-O APK instalado pede o endereço do servidor na primeira vez
-(botão "⚙ Configurar servidor" na tela de login). Digite a URL do Render:
+O APK já tem a URL `https://nora.onrender.com` embutida — quem baixar só precisa
+instalar e usar, sem configurar nada.
 
+**Importante**: isso só funciona se o serviço no Render se chamar exatamente `nora`
+(o `render.yaml` já pede esse nome). Se o nome estiver ocupado e o Render gerar outra
+URL (ex: `nora-abc123.onrender.com`), você tem duas opções:
+
+- Rápida: quem instalou usa o botão "⚙ Configurar servidor" na tela de login e digita a URL certa.
+- Definitiva: atualize `VITE_API_URL` em `frontend/.env.production` com a URL real e recompile:
+
+```powershell
+cd frontend
+npm run build
+npx cap sync android
+cd android
+$env:JAVA_HOME = "C:\Android\jdk21\jdk-21.0.11+10"
+$env:ANDROID_HOME = "C:\Android\Androidsdk"
+.\gradlew.bat assembleDebug
 ```
-https://nora.onrender.com
-```
 
-Para deixar a URL já embutida no APK (sem precisar configurar):
-
-1. Edite `frontend/.env.production` e coloque `VITE_API_URL=https://nora.onrender.com`
-2. Recompile: `cd frontend && npm run build && npx cap sync android && cd android && .\gradlew.bat assembleDebug`
-3. Copie o novo APK para `backend/public/downloads/nora.apk`
-4. Faça commit e push — o Render redeploya sozinho.
+Depois copie `frontend/android/app/build/outputs/apk/debug/app-debug.apk` para
+`backend/public/downloads/nora.apk`, faça commit e push — o Render redeploya sozinho.
 
 ## Avisos do plano gratuito do Render
 
