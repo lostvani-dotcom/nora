@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nora — Compartilhe seus momentos</title>
+  <meta name="description" content="Nora: a rede social para compartilhar fotos com amigos. Baixe o app para Android ou use direto no navegador." />
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --border: #dbdbdb;
+      --text: #262626;
+      --text-secondary: #737373;
+      --accent: #0095f6;
+      --grad: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #000;
+        --surface: #121212;
+        --border: #262626;
+        --text: #f5f5f5;
+        --text-secondary: #a8a8a8;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+    header.hero {
+      background: var(--grad);
+      color: #fff;
+      text-align: center;
+      padding: 70px 20px 90px;
+    }
+    .hero h1 {
+      font-family: "Brush Script MT", cursive;
+      font-size: 72px;
+      line-height: 1.1;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+    .hero p.tagline {
+      font-size: 20px;
+      max-width: 520px;
+      margin: 14px auto 34px;
+      opacity: 0.95;
+    }
+    .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 15px 34px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 17px;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,0.25); }
+    .btn-primary { background: #fff; color: #c13584; }
+    .btn-secondary { background: rgba(255,255,255,0.16); color: #fff; border: 2px solid rgba(255,255,255,0.7); }
+    .apk-note { margin-top: 14px; font-size: 13px; opacity: 0.85; }
+
+    section { padding: 64px 0; }
+    section h2 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    section p.section-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      text-align: center;
+    }
+    .feature .emoji { font-size: 40px; }
+    .feature h3 { margin: 10px 0 6px; font-size: 18px; }
+    .feature p { color: var(--text-secondary); font-size: 14px; }
+
+    .screens {
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .phone {
+      width: 220px;
+      border-radius: 26px;
+      border: 10px solid #1a1a1a;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.3);
+      background: #1a1a1a;
+    }
+    .phone img { width: 100%; display: block; }
+    .phone-label {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .video-wrap {
+      display: flex;
+      justify-content: center;
+    }
+    .video-phone {
+      width: 300px;
+      border-radius: 30px;
+      border: 12px solid #1a1a1a;
+      overflow: hidden;
+      box-shadow: 0 22px 50px rgba(0,0,0,0.35);
+      background: #000;
+    }
+    .video-phone video { width: 100%; display: block; }
+
+    .download-band {
+      background: var(--grad);
+      color: #fff;
+      text-align: center;
+      border-radius: 20px;
+      padding: 50px 24px;
+    }
+    .download-band h2 { color: #fff; }
+    .download-band p { margin-bottom: 26px; opacity: 0.95; }
+
+    .steps { max-width: 620px; margin: 0 auto; }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+    }
+    .step .num {
+      background: var(--accent);
+      color: #fff;
+      min-width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+    .step p { font-size: 15px; }
+    .step p strong { display: block; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 20px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    footer .logo {
+      font-family: "Brush Script MT", cursive;
+      font-size: 26px;
+      color: var(--text);
+    }
+    @media (max-width: 520px) {
+      .hero h1 { font-size: 52px; }
+      .phone { width: 160px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1>Nora</h1>
+    <p class="tagline">Compartilhe seus melhores momentos com fotos, curtidas e comentários. Grátis, rápido e feito para você.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="/downloads/nora.apk" download>⬇ Baixar APK (Android)</a>
+      <a class="btn btn-secondary" href="/app/">Usar no navegador</a>
+    </div>
+    <p class="apk-note">APK para Android 6.0 ou superior • Instalação fora da Play Store</p>
+  </header>
+
+  <section class="container">
+    <h2>Tudo que uma rede social precisa</h2>
+    <p class="section-sub">Simples como deve ser: você, seus amigos e seus momentos.</p>
+    <div class="features">
+      <div class="feature"><div class="emoji">📸</div><h3>Publique fotos</h3><p>Poste suas fotos com legenda em segundos.</p></div>
+      <div class="feature"><div class="emoji">❤️</div><h3>Curta e comente</h3><p>Interaja com as publicações dos seus amigos.</p></div>
+      <div class="feature"><div class="emoji">👥</div><h3>Siga pessoas</h3><p>Monte seu feed com quem você quer ver.</p></div>
+      <div class="feature"><div class="emoji">🔒</div><h3>Conta verificada</h3><p>Cadastro protegido com código de verificação por email.</p></div>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>Veja como é por dentro</h2>
+    <p class="section-sub">Capturas reais do aplicativo.</p>
+    <div class="screens">
+      <div>
+        <div class="phone"><img src="/assets/screen-feed.png" alt="Feed do Nora" loading="lazy" /></div>
+        <p class="phone-label">Seu feed</p>
+      </div>
+      <div>
+        <div class="phone"><img src="/assets/screen-post.png" alt="Post com comentários" loading="lazy" /></div>
+        <p class="phone-label">Comentários</p>
+      </div>
+      <div>
+        <div class="phone"><img src="/assets/screen-profile.png" alt="Perfil de usuário" loading="lazy" /></div>
+        <p class="phone-label">Perfil</p>
+      </div>
+      <div>
+        <div class="phone"><img src="/assets/screen-login.png" alt="Tela de login" loading="lazy" /></div>
+        <p class="phone-label">Login</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>O app em ação</h2>
+    <p class="section-sub">Navegando pelo feed, curtindo e comentando — em tempo real.</p>
+    <div class="video-wrap">
+      <div class="video-phone">
+        <video src="/assets/demo.webm" autoplay loop muted playsinline controls></video>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>Como instalar no Android</h2>
+    <p class="section-sub">Leva menos de um minuto.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><p><strong>Baixe o APK</strong>Toque no botão "Baixar APK" no topo desta página.</p></div>
+      <div class="step"><div class="num">2</div><p><strong>Autorize a instalação</strong>Se o Android pedir, permita "instalar apps de fontes desconhecidas" para o seu navegador.</p></div>
+      <div class="step"><div class="num">3</div><p><strong>Abra e crie sua conta</strong>Cadastre-se com seu email — você receberá um código de verificação para ativar a conta.</p></div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="download-band">
+      <h2>Pronto para começar?</h2>
+      <p>Baixe agora e entre para a comunidade.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/downloads/nora.apk" download>⬇ Baixar APK</a>
+        <a class="btn btn-secondary" href="/app/">Abrir no navegador</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">Nora</div>
+    <p>Projeto de rede social • Feito com Node.js, React e Capacitor</p>
+  </footer>
+</body>
+</html>

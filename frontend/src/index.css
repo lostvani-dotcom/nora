@@ -1,0 +1,659 @@
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #dbdbdb;
+  --text: #262626;
+  --text-secondary: #8e8e8e;
+  --accent: #0095f6;
+  --accent-hover: #1877f2;
+  --like: #ed4956;
+  --danger: #ed4956;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --surface: #121212;
+    --border: #262626;
+    --text: #f5f5f5;
+    --text-secondary: #a8a8a8;
+    --accent: #0095f6;
+    --accent-hover: #3ea6ff;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input,
+textarea {
+  font-family: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Navbar */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-inner {
+  max-width: 935px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  font-family: "Brush Script MT", cursive;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.navbar-icon-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text);
+  padding: 4px;
+}
+
+.navbar-profile-link {
+  display: flex;
+}
+
+/* Layout */
+
+.app-main {
+  max-width: 630px;
+  margin: 0 auto;
+  padding: 20px 12px 60px;
+}
+
+.feed-empty {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Auth pages */
+
+.auth-page {
+  max-width: 350px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 20px;
+}
+
+.auth-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 32px;
+  text-align: center;
+}
+
+.auth-logo {
+  font-family: "Brush Script MT", cursive;
+  font-size: 40px;
+  margin: 10px 0 24px;
+}
+
+.auth-subtitle {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.auth-form input {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+}
+
+.auth-form button {
+  margin-top: 8px;
+  padding: 8px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.auth-form button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.auth-error {
+  color: var(--danger);
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.auth-info {
+  color: var(--accent);
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.code-input {
+  text-align: center;
+  font-size: 22px !important;
+  letter-spacing: 8px;
+  font-weight: 700;
+}
+
+.resend-btn {
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.server-config-btn {
+  align-self: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.auth-switch {
+  font-size: 14px;
+}
+
+.auth-switch a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Feed tabs */
+
+.feed-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.feed-tabs button {
+  background: none;
+  border: none;
+  padding: 12px 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  border-bottom: 2px solid transparent;
+  text-transform: uppercase;
+}
+
+.feed-tabs button.active {
+  color: var(--text);
+  border-bottom-color: var(--text);
+}
+
+/* Post card */
+
+.post-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.post-time {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.post-image {
+  width: 100%;
+  display: block;
+  max-height: 600px;
+  object-fit: cover;
+  background: var(--bg);
+}
+
+.post-actions {
+  display: flex;
+  gap: 4px;
+  padding: 8px 10px 0;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  padding: 6px;
+  line-height: 1;
+}
+
+.like-btn.liked {
+  animation: pop 0.2s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.post-likes {
+  padding: 0 14px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.post-caption {
+  padding: 6px 14px 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.post-caption-author {
+  font-weight: 600;
+}
+
+.post-comments-link {
+  display: block;
+  padding: 6px 14px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.post-comment-form {
+  display: flex;
+  border-top: 1px solid var(--border);
+  margin-top: 10px;
+}
+
+.post-comment-form input {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+}
+
+.post-comment-form button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0 14px;
+}
+
+.post-comment-form button:disabled {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+/* Avatar */
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Follow button */
+
+.follow-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.follow-btn.following {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Create post page */
+
+.create-post-page {
+  max-width: 470px;
+  margin: 0 auto;
+}
+
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.file-drop {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.file-preview {
+  width: 100%;
+  height: 100%;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.create-post-form textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text);
+  resize: vertical;
+}
+
+.create-post-form button[type="submit"] {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* Post detail page */
+
+.post-page {
+  display: flex;
+  gap: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.post-page-image {
+  width: 55%;
+  object-fit: cover;
+  background: var(--bg);
+}
+
+.post-page-side {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  gap: 8px;
+}
+
+.post-page-comments {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comment-item {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.comment-time {
+  color: var(--text-secondary);
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.link-danger {
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .post-page {
+    flex-direction: column;
+  }
+  .post-page-image,
+  .post-page-side {
+    width: 100%;
+  }
+}
+
+/* Profile page */
+
+.profile-page {
+  max-width: 935px;
+  margin: 0 auto;
+}
+
+.profile-header {
+  display: flex;
+  gap: 40px;
+  padding: 20px 0;
+  align-items: flex-start;
+}
+
+.profile-avatar-wrap {
+  flex-shrink: 0;
+}
+
+.profile-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.profile-info-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile-info-top h2 {
+  font-weight: 400;
+  margin: 0;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 30px;
+  font-size: 14px;
+}
+
+.profile-bio {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.profile-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.profile-edit-form input[type="text"],
+.profile-edit-form textarea {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.profile-edit-form button[type="submit"] {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  align-self: flex-start;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+  text-align: left;
+  padding: 0;
+}
+
+.profile-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 10px 0 20px;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.profile-grid-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: block;
+  overflow: hidden;
+}
+
+.profile-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.profile-grid-item:hover .profile-grid-overlay {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .profile-header {
+    gap: 20px;
+  }
+  .profile-info-top {
+    flex-wrap: wrap;
+  }
+}
