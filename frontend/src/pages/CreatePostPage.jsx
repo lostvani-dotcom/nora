@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api/client";
+import { CameraIcon } from "../components/Icons";
 
 export default function CreatePostPage() {
   const navigate = useNavigate();
@@ -46,7 +47,10 @@ export default function CreatePostPage() {
           {preview ? (
             <img src={preview} alt="preview" className="file-preview" />
           ) : (
-            <span>Clique para selecionar uma imagem</span>
+            <span className="file-drop-hint">
+              <CameraIcon size={52} />
+              <span>Toque para escolher uma foto</span>
+            </span>
           )}
           <input type="file" accept="image/*" onChange={handleFileChange} hidden />
         </label>

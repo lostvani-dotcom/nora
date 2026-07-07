@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { API_URL, setApiUrl } from "../api/client";
+import { SettingsIcon } from "../components/Icons";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -71,7 +72,7 @@ export default function LoginPage() {
         Não tem uma conta? <Link to="/register">Cadastre-se</Link>
       </div>
       <button className="link-btn server-config-btn" onClick={handleConfigureServer}>
-        ⚙ Configurar servidor
+        <SettingsIcon size={14} /> Configurar servidor
       </button>
     </div>
   );

@@ -4,6 +4,7 @@ import { api, fileUrl } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { timeAgo } from "../utils/timeAgo";
 import Avatar from "../components/Avatar";
+import { HeartIcon } from "../components/Icons";
 
 export default function PostPage() {
   const { id } = useParams();
@@ -108,8 +109,9 @@ export default function PostPage() {
           <button
             className={`icon-btn like-btn ${post.isLiked ? "liked" : ""}`}
             onClick={toggleLike}
+            aria-label="Curtir"
           >
-            {post.isLiked ? "❤️" : "🤍"}
+            <HeartIcon size={26} filled={post.isLiked} />
           </button>
         </div>
         <div className="post-likes">

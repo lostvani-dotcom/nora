@@ -9,6 +9,7 @@ import FeedPage from "./pages/FeedPage";
 import ProfilePage from "./pages/ProfilePage";
 import PostPage from "./pages/PostPage";
 import CreatePostPage from "./pages/CreatePostPage";
+import SearchPage from "./pages/SearchPage";
 
 export default function App() {
   const { loading } = useAuth();
@@ -36,6 +37,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <CreatePostPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <SearchPage />
               </ProtectedRoute>
             }
           />

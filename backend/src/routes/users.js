@@ -4,6 +4,29 @@ const { requireAuth, optionalAuth } = require("../middleware/auth");
 
 const router = express.Router();
 
+// GET /api/users?q=texto — busca usuários por nome ou username
+router.get("/", async (req, res) => {
+  const q = (req.query.q || "").trim();
+  if (!q) return res.json({ users: [] });
+
+  const users = await prisma.user.findMany({
+    where: {
+      OR: [{ username: { contains: q } }, { name: { contains: q } }],
+    },
+    select: {
+      id: true,
+      username: true,
+      name: true,
+      avatar: true,
+      _count: { select: { followers: true, posts: true } },
+    },
+    orderBy: [{ followers: { _count: "desc" } }, { username: "asc" }],
+    take: 20,
+  });
+
+  res.json({ users });
+});
+
 router.get("/:username", optionalAuth, async (req, res) => {
   const user = await prisma.user.findUnique({
     where: { username: req.params.username },

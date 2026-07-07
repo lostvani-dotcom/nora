@@ -4,6 +4,7 @@ import { api, fileUrl } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import Avatar from "../components/Avatar";
 import FollowButton from "../components/FollowButton";
+import { HeartIcon, CommentIcon } from "../components/Icons";
 
 export default function ProfilePage() {
   const { username } = useParams();
@@ -143,8 +144,8 @@ export default function ProfilePage() {
             <Link to={`/post/${post.id}`} key={post.id} className="profile-grid-item">
               <img src={fileUrl(post.image)} alt={post.caption || "post"} />
               <div className="profile-grid-overlay">
-                <span>❤️ {post._count.likes}</span>
-                <span>💬 {post._count.comments}</span>
+                <span><HeartIcon size={20} filled /> {post._count.likes}</span>
+                <span><CommentIcon size={20} /> {post._count.comments}</span>
               </div>
             </Link>
           ))}

@@ -71,6 +71,7 @@ export const api = {
   addComment: (id, text) =>
     request(`/api/posts/${id}/comments`, { method: "POST", body: { text } }),
 
+  searchUsers: (q) => request(`/api/users?q=${encodeURIComponent(q)}`),
   getProfile: (username) => request(`/api/users/${username}`),
   follow: (id) => request(`/api/users/${id}/follow`, { method: "POST" }),
   unfollow: (id) => request(`/api/users/${id}/follow`, { method: "DELETE" }),
