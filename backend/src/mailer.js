@@ -4,14 +4,24 @@ let transporter = null;
 
 if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
   transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT || 587),
-    secure: Number(process.env.SMTP_PORT) === 465,
+    host: process.env.SMTP_HOST.trim(),
+    port: Number(String(process.env.SMTP_PORT || 587).trim()),
+    secure: Number(String(process.env.SMTP_PORT || "").trim()) === 465,
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      user: process.env.SMTP_USER.trim(),
+      pass: process.env.SMTP_PASS.trim(),
     },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 20000,
   });
+}
+
+function logCodeFallback(to, code, reason) {
+  console.log("=====================================================");
+  console.log(`[MAILER] ${reason}`);
+  console.log(`[MAILER] Código de verificação para ${to}: ${code}`);
+  console.log("=====================================================");
 }
 
 async function sendVerificationEmail(to, code) {
@@ -26,21 +36,23 @@ async function sendVerificationEmail(to, code) {
     </div>`;
 
   if (!transporter) {
-    console.log("=====================================================");
-    console.log(`[MAILER] SMTP não configurado. Código de verificação`);
-    console.log(`[MAILER] para ${to}: ${code}`);
-    console.log("=====================================================");
+    logCodeFallback(to, code, "SMTP não configurado.");
     return { delivered: false, devCode: true };
   }
 
-  await transporter.sendMail({
-    from: process.env.SMTP_FROM || process.env.SMTP_USER,
-    to,
-    subject,
-    text,
-    html,
-  });
-  return { delivered: true };
+  try {
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM || process.env.SMTP_USER,
+      to,
+      subject,
+      text,
+      html,
+    });
+    return { delivered: true };
+  } catch (err) {
+    logCodeFallback(to, code, `Falha ao enviar email (${err.message}).`);
+    return { delivered: false, error: err.message };
+  }
 }
 
 module.exports = { sendVerificationEmail };
