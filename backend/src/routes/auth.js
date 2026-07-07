@@ -26,6 +26,10 @@ function generateCode() {
   return String(crypto.randomInt(100000, 1000000));
 }
 
+// Verificação por email desligada por padrão; para exigir, defina
+// REQUIRE_EMAIL_VERIFICATION=true no ambiente (e configure o envio de email).
+const VERIFICATION_ENABLED = process.env.REQUIRE_EMAIL_VERIFICATION === "true";
+
 async function issueVerificationCode(user) {
   const code = generateCode();
   const expires = new Date(Date.now() + 15 * 60 * 1000);
@@ -58,16 +62,30 @@ router.post("/register", async (req, res) => {
 
   const hashed = await bcrypt.hash(password, 10);
   const user = await prisma.user.create({
-    data: { username, email, password: hashed, name: name || username },
+    data: {
+      username,
+      email,
+      password: hashed,
+      name: name || username,
+      emailVerified: !VERIFICATION_ENABLED,
+    },
   });
 
-  await issueVerificationCode(user);
+  if (VERIFICATION_ENABLED) {
+    await issueVerificationCode(user);
+    return res.status(201).json({
+      needsVerification: true,
+      email: user.email,
+      message: "Conta criada. Enviamos um código de verificação para o seu email.",
+    });
+  }
 
-  res.status(201).json({
-    needsVerification: true,
-    email: user.email,
-    message: "Conta criada. Enviamos um código de verificação para o seu email.",
+  const publicUser = await prisma.user.findUnique({
+    where: { id: user.id },
+    select: publicUserSelect,
   });
+  const token = signToken(user.id);
+  res.status(201).json({ user: publicUser, token });
 });
 
 router.post("/verify", async (req, res) => {
@@ -135,7 +153,7 @@ router.post("/login", async (req, res) => {
     return res.status(401).json({ error: "Credenciais inválidas." });
   }
 
-  if (!user.emailVerified) {
+  if (VERIFICATION_ENABLED && !user.emailVerified) {
     await issueVerificationCode(user);
     return res.status(403).json({
       needsVerification: true,
